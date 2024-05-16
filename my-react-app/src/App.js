@@ -5,7 +5,7 @@ import axios from 'axios';
 function App() {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('') 
   
   const fetchSong = async () => {
     try {
