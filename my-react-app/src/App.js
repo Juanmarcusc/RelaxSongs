@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
-import './App.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./App.css";
+import axios from "axios";
 
 function App() {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('') 
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const fetchSong = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/song?q=${searchTerm}`);
+      const response = await axios.get(
+        `http://localhost:3003/api/song?q=${searchTerm}`
+      );
       setSong(response.data);
     } catch (error) {
-      console.error('Error fetching song:', error);
+      console.error("Error fetching song:", error);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
-     <div className="App">
+    <div className="App">
       <h1>Relax Songs</h1>
-      <input placeholder="Procurar Música" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
-      <button onClick={fetchSong} disabled={loading}>Buscar</button>
+      <input
+        placeholder="Procurar Música"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      ></input>
+      <button onClick={fetchSong} disabled={loading}>
+        Buscar
+      </button>
       {song && (
         <div>
           <h2>{song.title}</h2>
@@ -34,7 +42,6 @@ function App() {
         </div>
       )}
     </div>
-
   );
 }
 
